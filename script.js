@@ -6,6 +6,7 @@ btn.addEventListener("click", (e) => {
     msg = document.querySelector(".message");
     msg.textContent = "Grid number must be 100 or less and greater than 0";
   } else {
+    removeBoxes();
     generateGrid(gridNumber);
     changeColor();
   }
@@ -35,5 +36,12 @@ function changeColor() {
     div.addEventListener("mouseover", () => {
       div.style.backgroundColor = "blue";
     });
+  });
+}
+
+function removeBoxes() {
+  let divs = document.querySelectorAll(".container div");
+  divs.forEach((div) => {
+    div.remove();
   });
 }
