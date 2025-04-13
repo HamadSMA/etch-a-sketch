@@ -1,6 +1,6 @@
 let btn = document.querySelector(".btn");
 btn.addEventListener("click", (e) => {
-  let gridNumber = Number(prompt("Grid must be 100x100 or less"));
+  let gridNumber = Number(prompt("Enter a number between 0 and 100"));
 
   if (gridNumber > 100 || gridNumber < 1) {
     msg = document.querySelector(".message");
