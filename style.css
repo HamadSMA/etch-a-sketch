@@ -1,6 +1,6 @@
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
 body {
   font-family: "Pixelify Sans", sans-serif;
@@ -23,7 +23,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
 }
 
 .input {

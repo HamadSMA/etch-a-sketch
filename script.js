@@ -4,7 +4,7 @@ btn.addEventListener("click", (e) => {
 
   if (gridNumber > 100 || gridNumber < 1) {
     msg = document.querySelector(".message");
-    msg.textContent = "Grid number must be 100 or less and greater than 0";
+    msg.textContent = "Must be a number between 100 or less and greater than 0";
   } else {
     removeBoxes();
     generateGrid(gridNumber);
@@ -16,15 +16,16 @@ function generateGrid(gridNumber) {
   let grid = gridNumber * gridNumber;
   const container = document.querySelector(".container");
   //Creat a dynamic container that will display boxes in a grid
-  boxSize = 20;
+  boxSize = 15;
   totalWidth = gridNumber * boxSize;
-  container.style.cssText = `width: ${totalWidth}px;`;
+  container.style.cssText = `width: ${totalWidth}px; border: 10px double black;`;
 
   //Create div boxes based on grid number
   let div;
   for (let i = 0; i < grid; i++) {
     div = document.createElement("div");
-    div.style.cssText = `width: ${boxSize}px; height: ${boxSize}px; border: 1px solid black;`;
+    div.style.cssText = `width: ${boxSize}px; height: ${boxSize}px;`;
+    div.style.opacity = Math.random();
     container.appendChild(div);
   }
 }
@@ -32,9 +33,21 @@ function generateGrid(gridNumber) {
 // Change color of box on hover
 function changeColor() {
   let divs = document.querySelectorAll(".container div");
+  let isMouseDown = false;
+
   divs.forEach((div) => {
-    div.addEventListener("mouseover", () => {
-      div.style.backgroundColor = "blue";
+    div.addEventListener("mouseover", (e) => {
+      let color = window.getComputedStyle(div).backgroundColor;
+      if (color === "rgba(0, 0, 0, 0)") {
+        div.style.backgroundColor = getNewColor();
+      } else if (color !== "rgba(0, 0, 0, 0)") {
+        opacity = window.getComputedStyle(div).opacity;
+        console.log(opacity);
+        div.style.opacity =
+          Number(div.style.opacity) < 1
+            ? Number(div.style.opacity) + 0.1
+            : div.style.pacity;
+      }
     });
   });
 }
@@ -44,4 +57,13 @@ function removeBoxes() {
   divs.forEach((div) => {
     div.remove();
   });
+}
+
+function getNewColor() {
+  let r = Math.floor(Math.random() * 256);
+  let g = Math.floor(Math.random() * 256);
+  let b = Math.floor(Math.random() * 256);
+  let color = `rgba(${r}, ${g}, ${b}`;
+
+  return color;
 }
