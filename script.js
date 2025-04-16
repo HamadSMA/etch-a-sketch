@@ -15,38 +15,30 @@ btn.addEventListener("click", (e) => {
 function generateGrid(gridNumber) {
   let grid = gridNumber * gridNumber;
   const container = document.querySelector(".container");
-  //Creat a dynamic container that will display boxes in a grid
-  boxSize = 15;
-  totalWidth = gridNumber * boxSize;
-  container.style.cssText = `width: ${totalWidth}px; border: 10px double black;`;
-
-  //Create div boxes based on grid number
-  let div;
+  let boxSize = container.clientWidth / gridNumber;
   for (let i = 0; i < grid; i++) {
-    div = document.createElement("div");
-    div.style.cssText = `width: ${boxSize}px; height: ${boxSize}px;`;
-    div.style.opacity = Math.random();
-    container.appendChild(div);
+    let box = document.createElement("div");
+    box.classList.add("box");
+    box.style.width = `${boxSize}px`;
+    box.style.height = `${boxSize}px`;
+    container.appendChild(box);
   }
 }
 
 // Change color of box on hover
 function changeColor() {
   let divs = document.querySelectorAll(".container div");
-  let isMouseDown = false;
 
   divs.forEach((div) => {
-    div.addEventListener("mouseover", (e) => {
+    div.addEventListener("mouseover", () => {
       let color = window.getComputedStyle(div).backgroundColor;
       if (color === "rgba(0, 0, 0, 0)") {
         div.style.backgroundColor = getNewColor();
       } else if (color !== "rgba(0, 0, 0, 0)") {
         opacity = window.getComputedStyle(div).opacity;
-        console.log(opacity);
-        div.style.opacity =
-          Number(div.style.opacity) < 1
-            ? Number(div.style.opacity) + 0.1
-            : div.style.pacity;
+        if (opacity < 1) {
+          div.style.opacity = Number(div.style.opacity) + 0.1;
+        }
       }
     });
   });
